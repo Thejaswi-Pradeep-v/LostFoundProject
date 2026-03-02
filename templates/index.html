@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Lost & Found Management</h1>
+        <p class="tagline">Helping you find lost items, faster and smarter.</p>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Never Lose Track of Your Items Again</h2>
+            <p>Upload lost/found items with images and manage them efficiently.</p>
+        </section>
+
+        <!-- Authentication -->
+        <section class="auth">
+            <h2>Register</h2>
+            <input type="text" id="reg_username" placeholder="Username">
+            <input type="password" id="reg_password" placeholder="Password">
+            <button onclick="register()">Register</button>
+
+            <h2>Login</h2>
+            <input type="text" id="login_username" placeholder="Username">
+            <input type="password" id="login_password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </section>
+
+        <!-- Add Item -->
+        <section class="add-item">
+            <h2>Add Lost/Found Item</h2>
+            <form id="addForm" enctype="multipart/form-data">
+                <input type="text" id="name" name="name" placeholder="Item Name" required>
+                <input type="text" id="description" name="description" placeholder="Description" required>
+                <input type="file" id="image" name="image" accept="image/*">
+                <button type="submit">Add Item</button>
+            </form>
+        </section>
+
+        <!-- Items List -->
+        <section class="items-list">
+            <h2>All Items</h2>
+            <ul id="items"></ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Email: support@lostfound.com</p>
+            <p>Phone: +91 6238542357</p>
+            <p>Address: 123 Tech Street, Kochi, India</p>
+        </section>
+
+        <!-- AI/Gemini Assistant -->
+        <section class="ai-chat">
+            <h2>AI Assistant</h2>
+            <input type="text" id="ai_input" placeholder="Ask me about lost/found items..." />
+            <button onclick="askAI()">Send</button>
+            <div id="ai_response"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

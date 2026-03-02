@@ -1,0 +1,126 @@
+/* Background Image via URL */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+/* Header & tagline */
+header {
+    background-color: rgba(44, 62, 80, 0.8);
+    text-align: center;
+    padding: 20px;
+    border-bottom: 3px solid #f1c40f;
+}
+
+header p.tagline {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #f1c40f;
+    margin-top: 5px;
+}
+
+/* Main container overlay */
+main {
+    background-color: rgba(0, 0, 0, 0.6);
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.hero h2 { font-size: 2em; margin-bottom: 10px; }
+.hero p { font-size: 1.2em; color: #f1c40f; }
+
+/* Forms and inputs */
+input {
+    padding: 10px;
+    margin: 5px 5px 15px 0;
+    width: 45%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Items list */
+ul { list-style: none; padding: 0; }
+li {
+    background: #ecf0f1;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #2c3e50;
+}
+img { margin-top: 10px; border-radius: 5px; }
+
+/* Contact Section */
+.contact {
+    background-color: rgba(44, 62, 80, 0.8);
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact p { margin: 5px 0; color: #ecf0f1; }
+
+/* AI Assistant Section */
+.ai-chat {
+    background-color: rgba(52, 152, 219, 0.8);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ai-chat input {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.ai-chat button {
+    padding: 10px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.ai-chat button:hover {
+    background-color: #e67e22;
+}
+
+#ai_response {
+    margin-top: 15px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 50px;
+}
