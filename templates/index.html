@@ -3,69 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost & Found</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Lost & Found - AI-Powered Item Recovery</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <!-- ===== HEADER ===== -->
     <header>
-        <h1>Lost & Found Management</h1>
-        <p class="tagline">Helping you find lost items, faster and smarter.</p>
+        <h1>✨ Lost & Found AI</h1>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h2>Never Lose Track of Your Items Again</h2>
-            <p>Upload lost/found items with images and manage them efficiently.</p>
-        </section>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Lost Something? Let AI Help You Find It.</h2>
+            <p>An intelligent lost and found platform powered by Gemini AI, image understanding, and smart matching.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' })">
+                    📌 Report Lost Item
+                </button>
+                <button class="btn btn-secondary" onclick="document.querySelector('.items-container').scrollIntoView({ behavior: 'smooth' })">
+                    🔍 Explore Found Items
+                </button>
+            </div>
+        </div>
+    </section>
 
-        <!-- Authentication -->
-        <section class="auth">
-            <h2>Register</h2>
-            <input type="text" id="reg_username" placeholder="Username">
-            <input type="password" id="reg_password" placeholder="Password">
-            <button onclick="register()">Register</button>
-
-            <h2>Login</h2>
-            <input type="text" id="login_username" placeholder="Username">
-            <input type="password" id="login_password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </section>
-
-        <!-- Add Item -->
-        <section class="add-item">
-            <h2>Add Lost/Found Item</h2>
-            <form id="addForm" enctype="multipart/form-data">
-                <input type="text" id="name" name="name" placeholder="Item Name" required>
-                <input type="text" id="description" name="description" placeholder="Description" required>
-                <input type="file" id="image" name="image" accept="image/*">
-                <button type="submit">Add Item</button>
+    <!-- ===== AUTHENTICATION SECTION ===== -->
+    <section id="auth-section" class="auth-container">
+        <!-- Register Card -->
+        <div class="auth-card glass-card">
+            <h3>Create Account</h3>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUsername" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a strong password" required>
+                    <div class="password-strength" id="regStrength">
+                        <div class="strength-bar"></div>
+                        <div class="strength-bar"></div>
+                        <div class="strength-bar"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="regConfirm" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
             </form>
-        </section>
+        </div>
 
-        <!-- Items List -->
-        <section class="items-list">
-            <h2>All Items</h2>
-            <ul id="items"></ul>
-        </section>
+        <!-- Login Card -->
+        <div class="auth-card glass-card">
+            <h3>Welcome Back</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="logUsername" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="logPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="rememberMe" style="width: auto;">
+                        Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: var(--accent-primary); text-decoration: none; font-size: 0.875rem;">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <h2>Contact Us</h2>
-            <p>Email: support@lostfound.com</p>
-            <p>Phone: +91 6238542357</p>
-            <p>Address: 123 Tech Street, Kochi, India</p>
-        </section>
+    <!-- ===== DASHBOARD STATISTICS ===== -->
+    <section class="stats-container">
+        <div class="stat-card glass-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-number" id="statTotal">0</div>
+            <div class="stat-label">Total Items</div>
+        </div>
+        <div class="stat-card glass-card">
+            <div class="stat-icon">❌</div>
+            <div class="stat-number" id="statLost">0</div>
+            <div class="stat-label">Lost Items</div>
+        </div>
+        <div class="stat-card glass-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="statFound">0</div>
+            <div class="stat-label">Found Items</div>
+        </div>
+        <div class="stat-card glass-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-number" id="statMatched">0</div>
+            <div class="stat-label">Successfully Matched</div>
+        </div>
+    </section>
 
-        <!-- AI/Gemini Assistant -->
-        <section class="ai-chat">
-            <h2>AI Assistant</h2>
-            <input type="text" id="ai_input" placeholder="Ask me about lost/found items..." />
-            <button onclick="askAI()">Send</button>
-            <div id="ai_response"></div>
-        </section>
-    </main>
+    <!-- ===== ITEM SUBMISSION FORM ===== -->
+    <section class="form-container">
+        <div class="form-card glass-card">
+            <h3>Report an Item</h3>
+            <form id="itemForm">
+                <div class="form-group">
+                    <label>Item Name *</label>
+                    <input type="text" id="itemName" placeholder="e.g., Black iPhone 14" required>
+                </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="itemDescription" placeholder="Describe the item in detail..." rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="itemCategory" required>
+                        <option value="">Select category...</option>
+                        <option value="Electronics">📱 Electronics</option>
+                        <option value="Accessories">👜 Accessories</option>
+                        <option value="Documents">📄 Documents</option>
+                        <option value="Jewelry">💍 Jewelry</option>
+                        <option value="Keys">🔑 Keys</option>
+                        <option value="Clothing">👕 Clothing</option>
+                        <option value="Other">🎁 Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Status *</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <label style="flex: 1; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" name="status" value="lost" required>
+                            ❌ Lost
+                        </label>
+                        <label style="flex: 1; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" name="status" value="found" required>
+                            ✅ Found
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Image</label>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📸</div>
+                        <p style="margin: 0.5rem 0; color: var(--text-secondary);">Drag & drop your image here</p>
+                        <p style="font-size: 0.875rem; color: var(--text-tertiary);">or click to select</p>
+                        <input type="file" id="itemImage" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="image-preview" id="imagePreview" style="display: none;">
+                        <img id="previewImg" src="" alt="Preview">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">📤 Submit Report</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== ITEMS LISTING ===== -->
+    <section class="items-container">
+        <h2 style="margin-bottom: 2rem; background: var(--gradient-secondary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Recent Items</h2>
+        <div class="items-grid" id="itemsGrid">
+            <div class="item-card glass-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <p style="color: var(--text-tertiary); font-size: 1.125rem;">No items yet. Be the first to report an item!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI CHAT WIDGET ===== -->
+    <div class="chat-widget">
+        <button class="chat-button" id="chatButton" onclick="toggleChat()">💬</button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h4>🤖 AI Assistant</h4>
+                <button class="chat-close" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything..." onkeypress="handleChatKeypress(event)">
+                <button class="chat-send" onclick="sendMessage()">↑</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
